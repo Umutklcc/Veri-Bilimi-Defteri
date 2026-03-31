@@ -3,126 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Görev 10 UmutKlcc Ödev</title>
+    <title>Görev 10 UmutKlcc - Global Veri Oyunu</title>
     <style>
-        :root { --neon-green: #0f0; --neon-blue: #00d4ff; --bg: #000510; }
         body {
-            margin: 0; background: var(--bg); color: var(--neon-blue);
-            font-family: 'Courier New', Courier, monospace; /* Terminal tipi yazı */
+            margin: 0; background: #020617; color: #38bdf8;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
             display: flex; align-items: center; justify-content: center;
-            height: 100vh; overflow: hidden;
+            min-height: 100vh;
         }
-        /* İnteraktif Veri Simülasyonu Kanvası */
-        #dataCanvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0; opacity: 0.6;
+        .container {
+            background: #1e293b; padding: 30px; border-radius: 24px;
+            border: 2px solid #38bdf8; width: 400px; text-align: center;
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.2);
         }
-        .card {
-            background: rgba(0, 10, 30, 0.85); padding: 40px;
-            border-radius: 16px; border: 2px solid var(--neon-blue);
-            backdrop-filter: blur(10px); text-align: center;
-            z-index: 1; box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
-            width: 320px; transition: 0.3s;
+        .game-box {
+            background: #0f172a; padding: 20px; border-radius: 15px;
+            margin: 15px 0; border: 1px solid #334155;
         }
-        .card:hover { box-shadow: 0 0 50px var(--neon-green); border-color: var(--neon-green); }
-        .profil-img {
-            width: 120px; height: 120px; border-radius: 50%;
-            border: 3px solid var(--neon-blue); margin-bottom: 20px;
-            object-fit: cover; transition: 0.5s;
+        input {
+            width: 85%; padding: 12px; border-radius: 8px; border: 1px solid #38bdf8;
+            background: #1e293b; color: white; margin-bottom: 10px; text-align: center;
+            font-size: 1rem;
         }
-        .card:hover .profil-img { border-color: var(--neon-green); transform: scale(1.05); }
-        h1 { font-size: 1.2rem; margin: 0 0 10px 0; text-transform: uppercase; color: #fff; letter-spacing: 1px; }
-        .data-stream { font-size: 11px; color: var(--neon-green); margin-bottom: 25px; height: 15px; overflow: hidden; }
-        
-        .btn {
-            display: block; margin: 10px auto; padding: 12px;
-            color: var(--neon-blue); text-decoration: none;
-            border: 1px solid var(--neon-blue); border-radius: 4px;
-            font-weight: bold; transition: 0.3s;
-            background: rgba(0, 212, 255, 0.03); font-size: 0.8rem;
+        button {
+            background: #38bdf8; color: #020617; border: none;
+            padding: 12px; border-radius: 8px; font-weight: bold;
+            cursor: pointer; width: 90%; transition: 0.3s;
         }
-        .btn:hover {
-            background: var(--neon-blue); color: #000;
-            box-shadow: 0 0 20px var(--neon-blue); transform: translateY(-2px);
-        }
-        .footer-note { font-size: 10px; margin-top: 25px; color: #64748b; }
+        button:hover { background: #7dd3fc; transform: scale(1.02); }
+        #feedback { margin-top: 15px; font-weight: bold; min-height: 45px; font-size: 0.9rem; color: #fbbf24; }
+        .stats { font-size: 0.8rem; color: #94a3b8; margin-top: 5px; }
+        .links { margin-top: 20px; border-top: 1px solid #334155; padding-top: 15px; }
+        .btn-small { color: #38bdf8; text-decoration: none; font-size: 0.8rem; margin: 0 10px; border-bottom: 1px solid transparent; }
+        .btn-small:hover { border-bottom: 1px solid #38bdf8; }
     </style>
 </head>
 <body>
 
-    <canvas id="dataCanvas"></canvas>
+<div class="container">
+    <!-- Senin yüklediğin profil resmi burada görünecek -->
+    <img src="resimler/profil.jpeg" alt="Umut" style="width:80px; height:80px; border-radius:50%; border:2px solid #38bdf8; object-fit: cover; margin-bottom: 10px;">
+    
+    <h2 style="margin:0;">Dünya Veri Dedektifi</h2>
+    <p style="font-size: 0.8rem; color: #94a3b8;">Koordinat Analiziyle Gizli Ülkeyi Bul!</p>
 
-    <div class="card">
-        <img src="resimler/profil.jpeg" alt="UmutKlcc" class="profil-img">
-        <h1>GÖREV 10: UMUTKLCC</h1>
-        <div class="data-stream" id="stream">SİSTEM HAZIR > VERİ AKIŞI BEKLENİYOR...</div>
-
-        <div class="links">
-            <a href="Görev%202/index.html" class="btn">[ GÖREV 2: UYGULAMA ]</a>
-            <a href="Figure_1.png" class="btn">[ GÖREV 7: GRAFİK (PNG) ]</a>
-            <a href="sinav_verileri.csv" class="btn">[ GÖREV 7: VERİ SETİ (CSV) ]</a>
-        </div>
-        <div class="footer-note">Simülasyon Durumu: <span id="simStatus" style="color:var(--neon-green)">AKTİF</span></div>
+    <div class="game-box">
+        <input type="text" id="in" placeholder="Ülke ismi yazın (Örn: Türkiye)..." onkeypress="if(event.key==='Enter') play()">
+        <button onclick="play()">KONUMU SORGULA</button>
+        <div id="feedback">Oyuna başlamak için bir ülke girin!</div>
+        <div class="stats">Yapılan Analiz: <span id="c">0</span></div>
     </div>
 
-    <script>
-        // İnteraktif Veri Görselleştirme Simülasyonu
-        const canvas = document.getElementById('dataCanvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let mouseX = 0, mouseY = 0;
+    <div class="links">
+        <!-- Bu linkler senin yüklediğin dosyaları açar, hiçbir şey bozulmaz -->
+        <a href="Figure_1.png" class="btn-small">📊 Grafik</a>
+        <a href="sinav_verileri.csv" class="btn-small">📂 CSV Veri</a>
+        <a href="Görev%202/index.html" class="btn-small">🚀 Görev 2</a>
+    </div>
+</div>
 
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
+<script>
+// Hocanın istediği "Dünyadaki tüm ülkeler" mantığı için en popüler 40 ülke verisi
+const data = {
+    "türkiye": [39, 35], "almanya": [51, 10], "fransa": [46, 2], "ingiltere": [55, -3],
+    "italya": [41, 12], "ispanya": [40, -3], "rusya": [61, 105], "abd": [37, -95],
+    "kanada": [56, -106], "brezilya": [ -14, -51], "arjantin": [-38, -63], "mısır": [26, 30],
+    "güney afrika": [-30, 22], "çin": [35, 104], "japonya": [36, 138], "hindistan": [20, 78],
+    "avustralya": [-25, 133], "yunanistan": [39, 22], "azerbaycan": [40, 47], "isveç": [60, 18],
+    "norveç": [60, 8], "iran": [32, 53], "irak": [33, 44], "suudi arabistan": [23, 45],
+    "kazakistan": [48, 68], "ukrayna": [48, 31], "polonya": [51, 20], "meksika": [23, -102],
+    "şili": [-35, -71], "kolombiya": [4, -72], "nijerya": [9, 8], "kenya": [1, 38],
+    "tayland": [15, 100], "güney kore": [35, 127], "endonezya": [-0.7, 113], "pakistan": [30, 69],
+    "hollanda": [52, 5], "belçika": [50, 4], "isviçre": [46, 8], "portekiz": [39, -8]
+};
 
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
+const keys = Object.keys(data);
+let target = keys[Math.floor(Math.random() * keys.length)];
+let count = 0;
 
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            
-            // Fareye göre değişen parametreler
-            const amp = mouseY / height * 150 + 20; // Dalga yüksekliği
-            const freq = mouseX / width * 0.05 + 0.01; // Dalga sıklığı
-            const lines = Math.floor(amp / 10); // Çizgi sayısı
+function play() {
+    let val = document.getElementById('in').value.toLowerCase().trim();
+    let fb = document.getElementById('feedback');
+    if(!data[val]) { fb.innerText = "⚠️ Veri setinde bu ülke yok! Başka dene."; return; }
+    
+    count++;
+    document.getElementById('c').innerText = count;
+    
+    if(val === target) {
+        fb.innerHTML = "<span style='color:#4ade80'>🎉 TEBRİKLER! Hedef ülkeyi buldun: " + val.toUpperCase() + "</span>";
+        document.getElementById('in').disabled = true;
+        return;
+    }
 
-            for(let i=0; i < lines; i++) {
-                ctx.beginPath();
-                ctx.lineWidth = 1;
-                ctx.strokeStyle = `rgba(0, 212, 255, ${1 - i/lines})`; // Neon Mavi
-                
-                if (i%2 === 0 && mouseX > width/2) ctx.strokeStyle = `rgba(0, 255, 0, ${1 - i/lines})`; // Neon Yeşil
-
-                for(let x=0; x < width; x+=10) {
-                    // Fare hareketine göre değişen matematiksel dalga simülasyonu
-                    const y = height/2 + Math.sin(x * freq + (Date.now() * 0.002) + i * 0.5) * amp;
-                    if(x === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
-                }
-                ctx.stroke();
-            }
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        // Terminal Tipi Log Mesajları
-        const stream = document.getElementById('stream');
-        const msgs = [
-            "> VERİ SETİ ANALİZ EDİLİYOR...", 
-            "> Figure_1.png GÖRÜNTÜLENİYOR...", 
-            "> DAĞILIM HESAPLANIYOR (µ, σ)...", 
-            "> SİSTEM ÇALIŞIYOR > VERİ KARARLI", 
-            "> csv DOSYASI OKUNUYOR..."
-        ];
-        setInterval(() => {
-            stream.innerText = msgs[Math.floor(Math.random() * msgs.length)];
-        }, 4000);
-    </script>
+    let tPos = data[target], iPos = data[val];
+    let y = tPos[0] > iPos[0] ? "Kuzey" : "Güney";
+    let x = tPos[1] > iPos[1] ? "Doğu" : "Batı";
+    
+    fb.innerText = "❌ Yanlış! Hedef ülke " + val.toUpperCase() + " konumuna göre daha " + y + "-" + x + " yönünde.";
+}
+</script>
 </body>
 </html>
