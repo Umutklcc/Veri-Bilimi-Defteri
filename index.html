@@ -3,67 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Görev 10 UmutKlcc - Global Veri Oyunu</title>
+    <title>UmutKlcc - Global Veri Dedektifi</title>
     <style>
+        :root { --neon: #00d4ff; --accent: #00ff88; --bg: #020617; }
         body {
-            margin: 0; background: #020617; color: #38bdf8;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0; background: var(--bg); color: #fff;
+            font-family: 'Poppins', sans-serif;
             display: flex; align-items: center; justify-content: center;
-            min-height: 100vh;
+            min-height: 100vh; overflow: hidden;
         }
+        /* Hareketli Arka Plan Efekti */
+        .bg-animate {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #003366 0%, #020617 100%);
+            z-index: -1;
+        }
+        .circle {
+            position: absolute; border-radius: 50%; background: var(--neon);
+            filter: blur(80px); opacity: 0.15; animation: move 20s infinite alternate;
+        }
+        @keyframes move { from { transform: translate(0, 0); } to { transform: translate(100px, 100px); } }
+
         .container {
-            background: #1e293b; padding: 30px; border-radius: 24px;
-            border: 2px solid #38bdf8; width: 400px; text-align: center;
-            box-shadow: 0 0 40px rgba(56, 189, 248, 0.2);
+            background: rgba(15, 23, 42, 0.8); padding: 40px; border-radius: 30px;
+            border: 1px solid rgba(0, 212, 255, 0.3); width: 420px; text-align: center;
+            backdrop-filter: blur(20px); box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: fadeIn 1s ease-out;
         }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .profil-img {
+            width: 100px; height: 100px; border-radius: 50%;
+            border: 3px solid var(--neon); margin-bottom: 15px;
+            box-shadow: 0 0 20px var(--neon); transition: 0.5s;
+        }
+        .profil-img:hover { transform: rotate(360deg) scale(1.1); }
+
         .game-box {
-            background: #0f172a; padding: 20px; border-radius: 15px;
-            margin: 15px 0; border: 1px solid #334155;
+            background: rgba(0, 0, 0, 0.3); padding: 25px; border-radius: 20px;
+            margin: 20px 0; border: 1px solid rgba(255, 255, 255, 0.1);
         }
         input {
-            width: 85%; padding: 12px; border-radius: 8px; border: 1px solid #38bdf8;
-            background: #1e293b; color: white; margin-bottom: 10px; text-align: center;
-            font-size: 1rem;
+            width: 90%; padding: 15px; border-radius: 12px; border: none;
+            background: rgba(255, 255, 255, 0.05); color: #fff;
+            margin-bottom: 15px; text-align: center; font-size: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); outline: none;
         }
+        input:focus { border: 1px solid var(--neon); }
+
         button {
-            background: #38bdf8; color: #020617; border: none;
-            padding: 12px; border-radius: 8px; font-weight: bold;
-            cursor: pointer; width: 90%; transition: 0.3s;
+            background: linear-gradient(45deg, var(--neon), var(--accent));
+            color: #020617; border: none; padding: 15px; border-radius: 12px;
+            font-weight: bold; cursor: pointer; width: 95%;
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
         }
-        button:hover { background: #7dd3fc; transform: scale(1.02); }
-        #feedback { margin-top: 15px; font-weight: bold; min-height: 45px; font-size: 0.9rem; color: #fbbf24; }
-        .stats { font-size: 0.8rem; color: #94a3b8; margin-top: 5px; }
-        .links { margin-top: 20px; border-top: 1px solid #334155; padding-top: 15px; }
-        .btn-small { color: #38bdf8; text-decoration: none; font-size: 0.8rem; margin: 0 10px; border-bottom: 1px solid transparent; }
-        .btn-small:hover { border-bottom: 1px solid #38bdf8; }
+        button:hover { transform: scale(1.03); box-shadow: 0 0 25px var(--neon); }
+
+        #feedback { margin-top: 20px; font-weight: bold; min-height: 50px; color: var(--accent); text-shadow: 0 0 10px rgba(0,255,136,0.5); }
+
+        .links { margin-top: 25px; display: flex; justify-content: center; gap: 15px; }
+        .btn-small {
+            color: #94a3b8; text-decoration: none; font-size: 0.8rem;
+            padding: 8px 15px; border-radius: 20px; background: rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+        .btn-small:hover { background: var(--neon); color: #020617; }
     </style>
 </head>
 <body>
 
+<div class="bg-animate">
+    <div class="circle" style="width: 400px; height: 400px; top: -100px; left: -100px;"></div>
+    <div class="circle" style="width: 300px; height: 300px; bottom: -50px; right: -50px; background: var(--accent);"></div>
+</div>
+
 <div class="container">
-    <!-- Senin yüklediğin profil resmi burada görünecek -->
-    <img src="resimler/profil.jpeg" alt="Umut" style="width:80px; height:80px; border-radius:50%; border:2px solid #38bdf8; object-fit: cover; margin-bottom: 10px;">
-    
-    <h2 style="margin:0;">Dünya Veri Dedektifi</h2>
-    <p style="font-size: 0.8rem; color: #94a3b8;">Koordinat Analiziyle Gizli Ülkeyi Bul!</p>
+    <img src="resimler/profil.jpeg" alt="Umut" class="profil-img">
+    <h2 style="margin:0; background: linear-gradient(to right, #fff, var(--neon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">DÜNYA DEDEKTİFİ</h2>
+    <p style="font-size: 0.8rem; color: #94a3b8;">Veri Koordinatlarıyla Hedefi Bul</p>
 
     <div class="game-box">
-        <input type="text" id="in" placeholder="Ülke ismi yazın (Örn: Türkiye)..." onkeypress="if(event.key==='Enter') play()">
-        <button onclick="play()">KONUMU SORGULA</button>
-        <div id="feedback">Oyuna başlamak için bir ülke girin!</div>
-        <div class="stats">Yapılan Analiz: <span id="c">0</span></div>
+        <input type="text" id="in" placeholder="Ülke ismi yazın..." onkeypress="if(event.key==='Enter') play()">
+        <button onclick="play()">KONUMU ANALİZ ET</button>
+        <div id="feedback">Analize başlamak için bir ülke girin!</div>
+        <div style="font-size: 0.7rem; color: #64748b;">Deneme Sayısı: <span id="c" style="color:var(--neon)">0</span></div>
     </div>
 
     <div class="links">
-        <!-- Bu linkler senin yüklediğin dosyaları açar, hiçbir şey bozulmaz -->
         <a href="Figure_1.png" class="btn-small">📊 Grafik</a>
-        <a href="sinav_verileri.csv" class="btn-small">📂 CSV Veri</a>
-        <a href="Görev%202/index.html" class="btn-small">🚀 Görev 2</a>
+        <a href="sinav_verileri.csv" class="btn-small">📂 Veri Seti</a>
+        <a href="Görev%202/index.html" class="btn-small">🚀 Ödev</a>
     </div>
 </div>
 
 <script>
-// Hocanın istediği "Dünyadaki tüm ülkeler" mantığı için en popüler 40 ülke verisi
 const data = {
     "türkiye": [39, 35], "almanya": [51, 10], "fransa": [46, 2], "ingiltere": [55, -3],
     "italya": [41, 12], "ispanya": [40, -3], "rusya": [61, 105], "abd": [37, -95],
@@ -73,8 +106,7 @@ const data = {
     "norveç": [60, 8], "iran": [32, 53], "irak": [33, 44], "suudi arabistan": [23, 45],
     "kazakistan": [48, 68], "ukrayna": [48, 31], "polonya": [51, 20], "meksika": [23, -102],
     "şili": [-35, -71], "kolombiya": [4, -72], "nijerya": [9, 8], "kenya": [1, 38],
-    "tayland": [15, 100], "güney kore": [35, 127], "endonezya": [-0.7, 113], "pakistan": [30, 69],
-    "hollanda": [52, 5], "belçika": [50, 4], "isviçre": [46, 8], "portekiz": [39, -8]
+    "tayland": [15, 100], "güney kore": [35, 127], "endonezya": [-0.7, 113], "pakistan": [30, 69]
 };
 
 const keys = Object.keys(data);
@@ -84,13 +116,14 @@ let count = 0;
 function play() {
     let val = document.getElementById('in').value.toLowerCase().trim();
     let fb = document.getElementById('feedback');
-    if(!data[val]) { fb.innerText = "⚠️ Veri setinde bu ülke yok! Başka dene."; return; }
+    if(!data[val]) { fb.innerText = "⚠️ Veri setinde bu ülke yok!"; fb.style.color="#f87171"; return; }
     
     count++;
     document.getElementById('c').innerText = count;
     
     if(val === target) {
-        fb.innerHTML = "<span style='color:#4ade80'>🎉 TEBRİKLER! Hedef ülkeyi buldun: " + val.toUpperCase() + "</span>";
+        fb.innerHTML = "🎉 TEBRİKLER! <br> Hedef: " + val.toUpperCase();
+        fb.style.color = "#4ade80";
         document.getElementById('in').disabled = true;
         return;
     }
@@ -99,7 +132,8 @@ function play() {
     let y = tPos[0] > iPos[0] ? "Kuzey" : "Güney";
     let x = tPos[1] > iPos[1] ? "Doğu" : "Batı";
     
-    fb.innerText = "❌ Yanlış! Hedef ülke " + val.toUpperCase() + " konumuna göre daha " + y + "-" + x + " yönünde.";
+    fb.innerText = "❌ Hedef ülke " + val.toUpperCase() + " konumuna göre " + y + "-" + x + " yönünde.";
+    fb.style.color = "#fbbf24";
 }
 </script>
 </body>
