@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Emin Umut Kılıç - Portfolyo</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            width: 300px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        h1 {
+            color: #58a6ff;
+            font-size: 24px;
+        }
+
+        #detaylar {
+            display: none;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #30363d;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card" onclick="acKapat()">
+        <h1>Emin Umut Kılıç</h1>
+        <p>Veri Bilimi ve Analitiği Öğrencisi</p>
+        <p style="font-size: 12px; color: #8b949e;">(Detaylar için tıkla)</p>
+
+        <div id="detaylar">
+            <strong>İlgi Alanlarım:</strong><br>
+            🎮 PS5 & FIFA <br>
+            📊 Veri Analizi <br>
+            🏛️ Tarih <br>
+            💻 Kodlama
+        </div>
+    </div>
+
+    <script>
+        function acKapat() {
+            var x = document.getElementById("detaylar");
+            if (x.style.display === "none" || x.style.display === "") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
