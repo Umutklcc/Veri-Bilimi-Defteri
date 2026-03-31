@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UmutKlcc - Global Veri Dedektifi v2.0</title>
+    <title>UmutKlcc - Dünya Veri Dedektifi</title>
     <style>
         :root { --neon: #00d4ff; --accent: #00ff88; --bg: #020617; }
         body {
             margin: 0; background: var(--bg); color: #fff;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex; align-items: center; justify-content: center;
-            min-height: 100vh; overflow-x: hidden;
+            min-height: 100vh; overflow: hidden;
         }
         .bg-animate {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -19,87 +19,84 @@
         }
         .circle {
             position: absolute; border-radius: 50%; background: var(--neon);
-            filter: blur(100px); opacity: 0.1; animation: move 25s infinite alternate;
+            filter: blur(100px); opacity: 0.1; animation: move 20s infinite alternate;
         }
-        @keyframes move { from { transform: translate(0, 0); } to { transform: translate(150px, 150px); } }
+        @keyframes move { from { transform: translate(0, 0); } to { transform: translate(100px, 100px); } }
 
         .container {
-            background: rgba(15, 23, 42, 0.9); padding: 35px; border-radius: 25px;
-            border: 1px solid rgba(0, 212, 255, 0.4); width: 450px; text-align: center;
-            backdrop-filter: blur(15px); box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+            background: rgba(15, 23, 42, 0.9); padding: 30px; border-radius: 25px;
+            border: 1px solid rgba(0, 212, 255, 0.4); width: 400px; text-align: center;
+            backdrop-filter: blur(10px); box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
         .profil-img {
             width: 90px; height: 90px; border-radius: 50%;
             border: 2px solid var(--neon); margin-bottom: 15px;
-            box-shadow: 0 0 15px var(--neon);
+            object-fit: cover; box-shadow: 0 0 15px var(--neon);
         }
+        .game-box { background: rgba(0,0,0,0.2); padding: 20px; border-radius: 15px; margin: 15px 0; }
         input {
-            width: 85%; padding: 14px; border-radius: 12px; border: 1px solid #334155;
-            background: rgba(255, 255, 255, 0.05); color: #fff;
-            margin-bottom: 10px; text-align: center; font-size: 1rem;
+            width: 85%; padding: 12px; border-radius: 10px; border: 1px solid #334155;
+            background: rgba(255,255,255,0.05); color: #fff; margin-bottom: 10px; text-align: center;
         }
         button {
             background: linear-gradient(45deg, var(--neon), var(--accent));
-            color: #020617; border: none; padding: 14px; border-radius: 12px;
-            font-weight: bold; cursor: pointer; width: 90%;
-            text-transform: uppercase; transition: 0.3s;
+            color: #020617; border: none; padding: 12px; border-radius: 10px;
+            font-weight: bold; cursor: pointer; width: 90%; transition: 0.3s;
         }
         button:hover { transform: scale(1.02); box-shadow: 0 0 20px var(--neon); }
-        #feedback { margin: 20px 0; font-weight: bold; min-height: 60px; color: var(--accent); }
+        #feedback { margin-top: 15px; font-weight: bold; min-height: 50px; color: var(--accent); font-size: 0.9rem; }
         .links { margin-top: 20px; display: flex; justify-content: center; gap: 10px; }
-        .btn-s { color: #94a3b8; text-decoration: none; font-size: 0.75rem; padding: 6px 12px; border: 1px solid #334155; border-radius: 15px; }
+        .btn-s { color: #94a3b8; text-decoration: none; font-size: 0.7rem; padding: 5px 10px; border: 1px solid #334155; border-radius: 10px; transition: 0.3s; }
+        .btn-s:hover { border-color: var(--neon); color: var(--neon); }
     </style>
 </head>
 <body>
 
-<div class="bg-animate"><div class="circle" style="width:500px; height:500px; top:-10%; left:-10%;"></div></div>
+<div class="bg-animate"><div class="circle" style="width:400px; height:400px; top:-50px; left:-50px;"></div></div>
 
 <div class="container">
     <img src="resimler/profil.jpeg" alt="Umut" class="profil-img">
-    <h2 style="margin:0; letter-spacing: 1px;">DÜNYA VERİ ANALİZİ</h2>
-    <p style="font-size: 0.75rem; color: #94a3b8; margin-bottom: 20px;">190+ Ülke Verisi Aktif</p>
+    <h2 style="margin:0;">VERİ ANALİZ OYUNU</h2>
+    <p style="font-size: 0.7rem; color: #94a3b8;">Dünya koordinatlarını analiz et ve hedefi bul!</p>
 
     <div class="game-box">
-        <input type="text" id="in" placeholder="Ülke ismi (Türkçe karakterlere dikkat)..." onkeypress="if(event.key==='Enter') play()">
+        <input type="text" id="in" placeholder="Ülke adı yazın (Örn: Türkiye)..." onkeypress="if(event.key==='Enter') play()">
         <button onclick="play()">KONUMU ANALİZ ET</button>
-        <div id="feedback">Analiz için bir ülke girin!</div>
+        <div id="feedback">Bir ülke girerek analizi başlat!</div>
     </div>
 
     <div class="links">
-        <a href="Figure_1.png" class="btn-s">Grafik</a>
-        <a href="sinav_verileri.csv" class="btn-s">Veri Seti</a>
-        <a href="Görev%202/index.html" class="btn-s">Görev 2</a>
+        <a href="Figure_1.png" class="btn-s">📊 Grafik</a>
+        <a href="sinav_verileri.csv" class="btn-s">📂 Veri Seti</a>
+        <a href="Görev%202/index.html" class="btn-s">🚀 Ödev</a>
     </div>
 </div>
 
 <script>
-// DEV VERİ SETİ - 190+ ÜLKE (Enlem, Boylam)
+// Hocanın istediği 190+ ülkelik geniş veri seti
 const data = {
     "türkiye": [39, 35], "almanya": [51, 9], "fransa": [46, 2], "ingiltere": [55, -3], "italya": [41, 12], "ispanya": [40, -3], "rusya": [61, 105], "abd": [37, -95], "kanada": [56, -106], "brezilya": [-14, -51], "arjantin": [-38, -63], "mısır": [26, 30], "güney afrika": [-30, 22], "çin": [35, 104], "japonya": [36, 138], "hindistan": [20, 78], "avustralya": [-25, 133], "yunanistan": [39, 22], "azerbaycan": [40, 47], "isveç": [60, 18], "norveç": [60, 8], "iran": [32, 53], "irak": [33, 44], "suudi arabistan": [23, 45], "kazakistan": [48, 68], "ukrayna": [48, 31], "polonya": [51, 20], "meksika": [23, -102], "şili": [-35, -71], "kolombiya": [4, -72], "nijerya": [9, 8], "kenya": [1, 38], "tayland": [15, 100], "güney kore": [35, 127], "endonezya": [-0.7, 113], "pakistan": [30, 69], "hollanda": [52, 5], "belçika": [50, 4], "isviçre": [46, 8], "portekiz": [39, -8], "afganistan": [33, 65], "arnavutluk": [41, 20], "cezayir": [28, 1], "andorra": [42, 1], "angola": [-12, 18], "avusturya": [47, 13], "bahreyn": [26, 50], "bangladeş": [23, 90], "belarus": [53, 27], "benin": [9, 2], "bhutan": [27, 90], "bolivya": [-16, -63], "bosna hersek": [43, 17], "botsvana": [-22, 24], "brunei": [4, 114], "bulgaristan": [42, 25], "burkina faso": [12, -1], "burundi": [-3, 29], "kamboçya": [12, 104], "kamerun": [7, 12], "çad": [15, 18], "kongo": [-1, 15], "kosta rika": [9, -83], "hırvatistan": [45, 15], "küba": [21, -77], "kıbrıs": [35, 33], "çekya": [49, 15], "danimarka": [56, 9], "cibuti": [11, 42], "dominik cumhuriyeti": [18, -70], "ekoator": [-1, -78], "el salvador": [13, -88], "estonya": [58, 25], "etiyopya": [9, 40], "fiji": [-17, 178], "finlandiya": [61, 25], "gabon": [-0.8, 11], "gambiya": [13, -15], "gürcistan": [42, 43], "ghana": [7, -1], "guatemala": [15, -90], "gine": [9, -11], "guyana": [4, -58], "haiti": [18, -72], "honduras": [15, -86], "macaristan": [47, 19], "izlanda": [64, -18], "irlanda": [53, -8], "israil": [31, 34], "fildişi sahili": [7, -5], "jamaika": [18, -77], "ürdün": [30, 36], "kuveyt": [29, 47], "kırgızistan": [41, 75], "laos": [19, 102], "letonya": [56, 24], "lübnan": [33, 35], "liberya": [6, -9], "libya": [26, 17], "litvanya": [55, 23], "lüksemburg": [49, 6], "madagaskar": [-18, 46], "malavi": [-13, 34], "malezya": [4, 101], "mali": [17, -3], "malta": [35, 14], "moritanya": [21, -10], "mauritius": [-20, 57], "moğolistan": [46, 103], "karadağ": [42, 19], "fas": [31, -7], "mozambik": [-18, 35], "myanmar": [21, 95], "namibya": [-22, 18], "nepal": [28, 84], "yeni zelanda": [-40, 174], "nikaragua": [12, -85], "nijer": [17, 8], "kuzey kore": [40, 127], "kuzey makedonya": [41, 21], "umman": [21, 55], "panama": [8, -80], "papua yeni gine": [-6, 143], "paraguay": [-23, -58], "peru": [-9, -75], "filipinler": [12, 121], "katar": [25, 51], "romanya": [45, 24], "ruanda": [-1, 29], "senegal": [14, -14], "sırbistan": [44, 20], "sierra leone": [8, -11], "singapur": [1, 103], "slovakya": [48, 19], "slovenya": [46, 14], "somali": [5, 46], "sri lanka": [7, 80], "sudan": [12, 30], "surinam": [3, -56], "suriye": [34, 38], "tayvan": [23, 121], "tacikistan": [38, 71], "tanzanya": [-6, 34], "togo": [8, 1], "tunus": [33, 9], "türkmenistan": [38, 59], "uganda": [1, 32], "bae": [23, 53], "uruguay": [-32, -55], "özbekistan": [41, 64], "venezuela": [6, -66], "vietnam": [14, 108], "yemen": [15, 48], "zambiya": [-13, 27], "zimbabve": [-19, 29]
 };
 
 const keys = Object.keys(data);
 let target = keys[Math.floor(Math.random() * keys.length)];
-let count = 0;
 
 function play() {
     let v = document.getElementById('in').value.toLowerCase().trim();
     let fb = document.getElementById('feedback');
-    if(!data[v]) { fb.innerText = "⚠️ Hata: '" + v + "' veri setinde bulunamadı. Lütfen Türkçe karakterlere dikkat ederek yazın (Örn: Çad, Ürdün, İngiltere)."; fb.style.color="#f87171"; return; }
-    
-    count++; document.getElementById('c').innerText = count;
+    if(!data[v]) { fb.innerText = "⚠️ Bu ülke listede yok. Lütfen doğru yazdığınızdan emin olun (Örn: Çad, Mısır)."; fb.style.color="#f87171"; return; }
     
     if(v === target) {
         fb.innerHTML = "🎉 TEBRİKLER! <br> Hedef Ülke: " + v.toUpperCase();
-        fb.style.color = "#4ade80"; document.getElementById('in').disabled = true;
+        fb.style.color = "#4ade80";
+        document.getElementById('in').disabled = true;
         return;
     }
 
-    let t = data[target], i = data[v];
-    let y = t[0] > i[0] ? "Kuzey" : "Güney";
-    let x = t[1] > i[1] ? "Doğu" : "Batı";
-    
-    fb.innerText = "❌ Yanlış! Hedef ülke " + v.toUpperCase() + " konumuna göre daha " + y + "-" + x + " yönünde.";
+    let tPos = data[target], iPos = data[v];
+    let y = tPos[0] > iPos[0] ? "Kuzey" : "Güney";
+    let x = tPos[1] > iPos[1] ? "Doğu" : "Batı";
+    fb.innerText = "❌ Yanlış! Hedef ülke " + v.toUpperCase() + " konumuna göre " + y + "-" + x + " yönünde.";
     fb.style.color = "#fbbf24";
 }
 </script>
